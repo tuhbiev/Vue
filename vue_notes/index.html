@@ -12,7 +12,10 @@
 
     <div class="container pt-5" id="app">
         <div class="card ">
-            <h1>{{ appTitle }}</h1>
+            <h1 :style="{
+                color: inputValue.length < 5 ? 'darkred' : 'darkblue',
+                fontSize: inputValue.length < 7 ? '2rem' : '1.5rem' 
+            }">{{ appTitle }}</h1>
             <div class="form-control">
                 <input type="text" :placeholder="placeholderString" v-model="inputValue" @keypress.enter="addNewNote" />
             </div>
@@ -21,7 +24,7 @@
             <hr />
             <ul class="list" v-if="notes.length !== 0">
                 <li class="list-item" v-for="(note, idx) in notes">
-                    ({{ idx+1 }}) {{ toUpperCase(note) }}
+                    <span :class="['bold', {'primary': note.length > 5}]">({{ idx+1 }}) {{ toUpperCase(note) }}</span>
                     <button class="btn danger" @click="removeNote(idx, $event)">Удалить</button>
                 </li>
                 <hr />
