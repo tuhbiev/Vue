@@ -14,7 +14,7 @@
         <div class="card ">
             <h1>{{ appTitle }}</h1>
             <div class="form-control">
-                <input type="text" :placeholder="placeholderString" :value="inputValue" @input="inputChangeHandler" @keypress.enter="addNewNote" />
+                <input type="text" :placeholder="placeholderString" v-model="inputValue" @keypress.enter="addNewNote" />
             </div>
 
             <button class="btn" @click="addNewNote">Добавить</button>
@@ -23,6 +23,10 @@
                 <li class="list-item" v-for="(note, idx) in notes">
                     ({{ idx+1 }}) {{ toUpperCase(note) }}
                     <button class="btn danger" @click="removeNote(idx, $event)">Удалить</button>
+                </li>
+                <hr />
+                <li>
+                    <strong>Общее количество: {{ notes.length }}</strong>
                 </li>
             </ul>
             <div v-else>Заметок пока нет. Добавьте новую.</div>
